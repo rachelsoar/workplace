@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workplace AI — Turn Your Company's Conversations Into Performance</title>
+  <meta name="description" content="Workplace AI captures every meeting, structures the knowledge inside it, and turns conversations into tracked action — so decisions compound instead of disappearing.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800;900&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+    :root {
+      --bg: #ffffff;
+      --bg-tint: #f4edfc;
+      --bg-subtle: #fafafa;
+      --bg-dark: #01081b;
+      --fg: #01081b;
+      --fg-muted: #4d525f;
+      --fg-subtle: #8a8f9a;
+      --fg-light: #ffffff;
+      --brand: #8100ff;
+      --brand-blue: #2e68fd;
+      --brand-tint: #f4edfc;
+      --border: rgba(1,8,27,0.08);
+      --border-light: rgba(255,255,255,0.10);
+      --r-sm: 8px; --r-md: 14px; --r-lg: 20px; --r-xl: 28px; --r-pill: 100px;
+      --shadow-card: 0 1px 3px rgba(1,8,27,0.06), 0 0 0 1px rgba(1,8,27,0.04);
+      --shadow-hover: 0 8px 30px rgba(129,0,255,0.08), 0 0 0 1px rgba(129,0,255,0.10);
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 400; font-size: 16px; line-height: 1.65;
+      color: var(--fg); background: var(--bg);
+    }
+    h1,h2,h3,h4 { font-family: 'Urbanist', sans-serif; line-height: 1.08; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Layout ── */
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 48px; }
+    .section { padding: 112px 0; }
+
+    /* ── Typography ── */
+    .eyebrow {
+      font-family: 'Urbanist', sans-serif;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--fg-subtle); display: block;
+      margin-bottom: 16px;
+    }
+    .eyebrow-brand { color: var(--brand); }
+    .section-head { margin-bottom: 56px; }
+    .section-head h2 {
+      font-size: clamp(36px, 4vw, 54px); font-weight: 800;
+      letter-spacing: -0.03em; max-width: 700px;
+    }
+    .section-head h2 span { color: var(--brand); }
+    .section-head p {
+      font-size: 18px; font-weight: 300; color: var(--fg-muted);
+      max-width: 500px; margin-top: 16px; line-height: 1.65;
+    }
+
+    /* ── Buttons ── */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--brand); color: #fff;
+      font-family: 'Urbanist', sans-serif;
+      font-size: 15px; font-weight: 600;
+      padding: 12px 26px; border-radius: var(--r-pill);
+      border: none; cursor: pointer; text-decoration: none;
+      transition: opacity 0.15s, transform 0.15s, box-shadow 0.15s;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(129,0,255,0.3); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: transparent; color: var(--fg-muted);
+      font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 400;
+      border: none; cursor: pointer; text-decoration: none;
+      transition: color 0.15s;
+    }
+    .btn-ghost:hover { color: var(--fg); }
+
+    /* ── Nav ── */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(16px) saturate(1.2);
+      -webkit-backdrop-filter: blur(16px) saturate(1.2);
+      border-bottom: 1px solid var(--border);
+      height: 62px; padding: 0 48px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px;
+      font-family: 'Urbanist', sans-serif; font-size: 15px; font-weight: 700;
+      color: var(--fg); flex-shrink: 0;
+    }
+    .nav-logo img { height: 30px; }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a { font-size: 14px; font-weight: 400; color: var(--fg-muted); transition: color 0.15s; }
+    .nav-links a:hover { color: var(--fg); }
+    .nav-right { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+    .nav-signin { font-size: 14px; color: var(--fg-muted); transition: color 0.15s; }
+    .nav-signin:hover { color: var(--fg); }
+    .nav .btn-primary { font-size: 14px; padding: 10px 22px; }
+
+    /* ── Hero (centered, like Fleet) ── */
+    .hero { padding: 120px 0 80px; text-align: center; }
+    .hero h1 {
+      font-size: clamp(48px, 6vw, 80px); font-weight: 800;
+      letter-spacing: -0.04em; line-height: 1.0; margin-bottom: 24px;
+    }
+    .hero h1 span { color: var(--brand); }
+    .hero > .container > p {
+      font-size: 19px; font-weight: 300; color: var(--fg-muted);
+      max-width: 520px; margin: 0 auto 40px; line-height: 1.65;
+    }
+    .hero-ctas {
+      display: flex; align-items: center; justify-content: center;
+      gap: 16px; flex-wrap: wrap;
+    }
+
+    /* ── Trust Logos (infinite scroll ticker) ── */
+    .trust-bar {
+      padding: 48px 0; border-top: 1px solid var(--border);
+      overflow: hidden;
+      mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    }
+    .trust-track {
+      display: flex; align-items: center; gap: 64px;
+      width: max-content;
+      animation: ticker 40s linear infinite;
+    }
+    .trust-track:hover { animation-play-state: paused; }
+    .trust-track img {
+      height: 48px; width: auto; flex-shrink: 0;
+      filter: grayscale(100%); opacity: 0.5;
+      transition: filter 0.3s, opacity 0.3s;
+    }
+    .trust-track img:hover { filter: grayscale(0%); opacity: 1; }
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── How It Works (full-width head, then two-column below) ── */
+    .outcome-section { background: var(--bg-subtle); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .outcome-layout {
+      display: flex; gap: 56px; align-items: center;
+    }
+    .outcome-steps {
+      flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 32px;
+    }
+    .outcome-step { display: flex; gap: 16px; align-items: flex-start; }
+    .outcome-num {
+      flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%;
+      background: var(--brand); color: #fff;
+      font-family: 'Urbanist', sans-serif; font-size: 14px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 2px;
+    }
+    .outcome-step h3 { font-size: 17px; font-weight: 700; margin-bottom: 4px; letter-spacing: -0.01em; }
+    .outcome-step p { font-size: 14px; color: var(--fg-muted); line-height: 1.6; font-weight: 300; }
+
+    /* ── UI Preview Card ── */
+    .ui-preview {
+      flex: 0 0 520px; max-width: 520px;
+      border-radius: var(--r-lg); overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      box-shadow: 0 20px 60px rgba(1,8,27,0.08), 0 0 0 1px rgba(1,8,27,0.03);
+      font-family: 'Outfit', sans-serif;
+    }
+    .ui-titlebar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 20px; border-bottom: 1px solid var(--border);
+      background: var(--bg-subtle);
+    }
+    .ui-titlebar-left { display: flex; align-items: center; gap: 8px; }
+    .ui-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .ui-titlebar h4 { font-size: 14px; font-weight: 700; letter-spacing: -0.01em; margin-left: 4px; }
+    .ui-titlebar-date { font-size: 12px; color: var(--fg-subtle); }
+    .ui-tabs {
+      display: flex; gap: 0; border-bottom: 1px solid var(--border);
+    }
+    .ui-tab {
+      padding: 10px 20px; font-size: 13px; font-weight: 500; color: var(--fg-subtle);
+      border-bottom: 2px solid transparent; transition: all 0.15s;
+    }
+    .ui-tab.active { color: var(--brand); border-bottom-color: var(--brand); font-weight: 600; }
+    .ui-body { padding: 20px; }
+    .ui-section-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--fg-subtle); margin-bottom: 10px;
+    }
+    .ui-summary {
+      font-size: 13px; color: var(--fg-muted); line-height: 1.6; font-weight: 300;
+      margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
+    }
+    .ui-action {
+      display: flex; align-items: flex-start; gap: 8px;
+      padding: 6px 0; font-size: 13px; color: var(--fg); font-weight: 400;
+    }
+    .ui-checkbox {
+      width: 16px; height: 16px; border-radius: 4px;
+      border: 1.5px solid var(--border); flex-shrink: 0; margin-top: 1px;
+      background: var(--bg);
+    }
+    .ui-action .tag {
+      font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 100px;
+      margin-left: auto; flex-shrink: 0;
+    }
+    .tag-high { background: #fef2f2; color: #dc2626; }
+    .tag-med { background: #fffbeb; color: #d97706; }
+    .tag-low { background: #f0fdf4; color: #16a34a; }
+    .ui-stats {
+      display: flex; gap: 0; margin-top: 16px; padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .ui-stat {
+      flex: 1; text-align: center;
+      padding: 8px 0;
+    }
+    .ui-stat:first-child { border-right: 1px solid var(--border); }
+    .ui-stat-val {
+      font-family: 'Urbanist', sans-serif; font-size: 22px; font-weight: 800;
+      color: var(--fg); letter-spacing: -0.02em;
+    }
+    .ui-stat-label { font-size: 12px; color: var(--fg-subtle); margin-top: 2px; }
+
+    /* ── Role Cards (left-aligned head) ── */
+    .roles-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+    }
+    .role-card {
+      padding: 32px; border-radius: var(--r-xl);
+      border: 1px solid var(--border); background: var(--bg);
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+    }
+    .role-card:hover {
+      border-color: rgba(129,0,255,0.2);
+      box-shadow: var(--shadow-hover); transform: translateY(-2px);
+    }
+    .role-card .material-symbols-outlined {
+      font-size: 24px; color: var(--brand); margin-bottom: 14px;
+      font-variation-settings: 'FILL' 1;
+    }
+    .role-card h3 { font-size: 20px; margin-bottom: 10px; letter-spacing: -0.01em; }
+    .role-card p { font-size: 15px; color: var(--fg-muted); line-height: 1.65; font-weight: 300; }
+
+    /* ── Testimonials (left-aligned head) ── */
+    .test-section { background: var(--bg-subtle); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .test-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .test-card {
+      padding: 32px; border-radius: var(--r-xl);
+      background: var(--bg); border: 1px solid var(--border);
+    }
+    .test-stars { color: #f5c518; font-size: 16px; margin-bottom: 16px; letter-spacing: 2px; }
+    .test-card blockquote {
+      font-size: 15px; line-height: 1.7; color: var(--fg-muted); font-weight: 300;
+      font-style: normal; margin-bottom: 24px;
+    }
+    .test-author { display: flex; align-items: center; gap: 12px; }
+    .test-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--brand-tint); color: var(--brand);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Urbanist', sans-serif; font-size: 14px; font-weight: 700;
+    }
+    .test-name { font-family: 'Urbanist', sans-serif; font-weight: 700; font-size: 14px; }
+    .test-role { font-size: 13px; color: var(--fg-subtle); }
+
+    /* ── V2 Banner (promo-style) ── */
+    .v2-banner {
+      background: linear-gradient(135deg, #f9f9f9 0%, var(--brand-tint) 40%, #ddd0f7 80%, #c4b5f0 100%);
+      padding: 56px 0;
+      border-top: 1px solid rgba(129,0,255,0.08);
+      border-bottom: 1px solid rgba(129,0,255,0.12);
+      position: relative; overflow: hidden;
+    }
+    .v2-banner::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
+      background-size: 200% 100%;
+      animation: v2shimmer 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes v2shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    .v2-banner-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 40px; flex-wrap: wrap; position: relative; z-index: 1;
+    }
+    .v2-banner-text { flex: 1; min-width: 280px; }
+    .v2-banner-text h3 {
+      font-family: 'Urbanist', sans-serif;
+      font-size: clamp(22px, 3vw, 30px); font-weight: 800;
+      color: var(--fg); line-height: 1.2; letter-spacing: -0.02em;
+    }
+    .v2-banner-text h3 span { color: var(--brand); }
+    .v2-banner-bullets {
+      display: flex; gap: 24px; margin-top: 12px; flex-wrap: wrap;
+    }
+    .v2-banner-bullets li {
+      list-style: none; font-size: 14px; font-weight: 400; color: var(--fg-muted);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .v2-banner-bullets li::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--brand); flex-shrink: 0;
+    }
+
+    /* ── Final CTA (centered) ── */
+    .cta-final { text-align: center; }
+    .cta-final h2 { max-width: 560px; margin: 0 auto 16px; }
+    .cta-final p { max-width: 480px; margin: 0 auto 36px; color: var(--fg-muted); font-size: 18px; font-weight: 300; }
+    .cta-buttons { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
+
+    /* ── Footer ── */
+    .footer { background: var(--bg-dark); padding: 64px 0 48px; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 48px; }
+    .footer-brand { max-width: 300px; }
+    .footer-brand img { height: 28px; margin-bottom: 14px; filter: brightness(10); }
+    .footer-brand p { font-size: 14px; font-style: italic; color: rgba(255,255,255,0.35); line-height: 1.6; }
+    .footer-links { display: flex; gap: 36px; }
+    .footer-links a { font-size: 14px; color: rgba(255,255,255,0.45); transition: color 0.15s; }
+    .footer-links a:hover { color: #fff; }
+    .footer-divider { height: 1px; background: rgba(255,255,255,0.06); margin-bottom: 24px; }
+    .footer-bottom { font-size: 13px; text-align: center; color: rgba(255,255,255,0.3); }
+    .footer-bottom a { color: rgba(255,255,255,0.45); }
+    .footer-bottom a:hover { color: #fff; }
+
+    /* ── Fade-up ── */
+    .fade-up { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .outcome-layout { flex-direction: column; gap: 40px; }
+      .ui-preview { flex: none; max-width: 100%; width: 100%; }
+      .teaser-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 700px) {
+      .container { padding: 0 20px; }
+      .section { padding: 72px 0; }
+      .nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 100px 0 64px; }
+      .hero h1 { font-size: 38px; }
+      .hero-ctas { flex-direction: column; align-items: center; }
+      .roles-grid { grid-template-columns: 1fr; }
+      .test-grid { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; gap: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════ NAV -->
+<nav class="nav">
+  <a class="nav-logo" href="/">
+    <img src="Workplace AI_files/JWmZL2ePmAxEEB4sHm72PhAW5M8.webp" alt="Workplace AI">
+  </a>
+  <ul class="nav-links" role="list">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#solutions">Solutions</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+  </ul>
+  <div class="nav-right">
+    <a class="nav-signin" href="https://app.workplace-ai.com/Auth/Login" target="_blank" rel="noopener">Login</a>
+    <a class="btn-primary" href="#book-demo">Book a Demo</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════ HERO (centered) -->
+<section class="hero">
+  <div class="container">
+    <span class="eyebrow eyebrow-brand fade-up" style="margin-bottom:24px;">Meeting Intelligence Platform</span>
+    <h1 class="fade-up">Turn your company's conversations<br><span>into performance.</span></h1>
+    <p class="fade-up">Every meeting captured, structured, and turned into action — automatically.</p>
+    <div class="hero-ctas fade-up">
+      <a class="btn-primary" href="#book-demo" style="font-size:16px;padding:14px 32px;">Book a Demo</a>
+      <a class="btn-ghost" href="#features">See how it works →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ V2 BANNER -->
+<section class="v2-banner">
+  <div class="container">
+    <div class="v2-banner-inner">
+      <div class="v2-banner-text">
+        <span class="eyebrow eyebrow-brand" style="margin-bottom:10px;">Coming Soon</span>
+        <h3>Workplace AI <span>2.0</span> is almost here.</h3>
+        <ul class="v2-banner-bullets">
+          <li>Sharper AI summaries & insights</li>
+          <li>Flexible transcript sources</li>
+          <li>Built to scale with your team</li>
+        </ul>
+      </div>
+      <div style="flex-shrink:0;">
+        <a href="#book-demo" class="btn-primary">Book a Demo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ HOW IT WORKS + UI PREVIEW -->
+<section class="section outcome-section" id="features">
+  <div class="container">
+    <div class="section-head fade-up" style="margin-bottom:64px;">
+      <span class="eyebrow eyebrow-brand">How It Works</span>
+      <h2>From conversation to execution — <span>automatically.</span></h2>
+      <p>Most companies lose their best thinking the moment a meeting ends. Workplace AI closes that gap.</p>
+    </div>
+    <div class="outcome-layout fade-up">
+      <div class="outcome-steps">
+          <div class="outcome-step">
+            <div class="outcome-num">1</div>
+            <div>
+              <h3>Capture</h3>
+              <p>Meetings and calls recorded and transcribed across every platform — no setup, no friction.</p>
+            </div>
+          </div>
+          <div class="outcome-step">
+            <div class="outcome-num">2</div>
+            <div>
+              <h3>Structure</h3>
+              <p>Raw conversation becomes organized knowledge — decisions, insights, and context you can find and use.</p>
+            </div>
+          </div>
+          <div class="outcome-step">
+            <div class="outcome-num">3</div>
+            <div>
+              <h3>Execute</h3>
+              <p>Action items and commitments surfaced and tracked — so work gets done, not just discussed.</p>
+            </div>
+          </div>
+          <div class="outcome-step">
+            <div class="outcome-num">4</div>
+            <div>
+              <h3>Improve</h3>
+              <p>See how your team performs — what's working, what's breaking down, and where to focus next.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: illustrated UI preview (matches real product layout) -->
+      <div class="ui-preview fade-up" style="transition-delay:0.15s;">
+        <div style="display:flex;height:100%;">
+          <!-- Sidebar -->
+          <div style="width:160px;border-right:1px solid var(--border);padding:16px 12px;background:var(--bg);flex-shrink:0;">
+            <div style="font-family:'Urbanist',sans-serif;font-size:13px;font-weight:800;color:var(--fg);margin-bottom:20px;display:flex;align-items:center;gap:6px;">
+              <div style="width:18px;height:18px;background:var(--brand);border-radius:4px;"></div>
+              workplace ai
+            </div>
+            <div style="display:flex;flex-direction:column;gap:2px;">
+              <div style="font-size:12px;padding:6px 8px;border-radius:6px;color:var(--fg-subtle);">Record Meeting</div>
+              <div style="font-size:12px;padding:6px 8px;border-radius:6px;background:var(--brand-tint);color:var(--brand);font-weight:600;">Meetings</div>
+              <div style="font-size:12px;padding:6px 8px;border-radius:6px;color:var(--fg-subtle);">Insights</div>
+              <div style="font-size:12px;padding:6px 8px;border-radius:6px;color:var(--fg-subtle);">Shared with Me</div>
+              <div style="font-size:12px;padding:6px 8px;border-radius:6px;color:var(--fg-subtle);">Email Composer</div>
+              <div style="font-size:12px;padding:6px 8px;border-radius:6px;color:var(--fg-subtle);">Reports</div>
+              <div style="font-size:12px;padding:6px 8px;border-radius:6px;color:var(--fg-subtle);">My Copilot</div>
+            </div>
+          </div>
+          <!-- Main content area -->
+          <div style="flex:1;min-width:0;">
+            <!-- Meeting title bar -->
+            <div style="padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;">
+              <div>
+                <div style="font-family:'Urbanist',sans-serif;font-size:14px;font-weight:700;color:var(--fg);">Q2 Planning Sync</div>
+                <div style="font-size:11px;color:var(--fg-subtle);margin-top:2px;">May 8, 2026</div>
+              </div>
+              <div style="display:flex;gap:6px;align-items:center;">
+                <div style="font-size:11px;font-weight:600;color:#fff;background:var(--brand);padding:5px 14px;border-radius:6px;white-space:nowrap;">AI Actions</div>
+                <div style="font-size:11px;font-weight:500;color:var(--fg-muted);padding:5px 12px;border-radius:6px;border:1px solid var(--border);">Share</div>
+              </div>
+            </div>
+            <!-- Video thumbnail -->
+            <div style="margin:14px 16px 0;background:#111;border-radius:8px;height:120px;display:flex;align-items:center;justify-content:center;position:relative;">
+              <div style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;">
+                <div style="width:0;height:0;border-style:solid;border-width:7px 0 7px 12px;border-color:transparent transparent transparent rgba(255,255,255,0.8);margin-left:2px;"></div>
+              </div>
+            </div>
+            <!-- Tabs -->
+            <div style="display:flex;gap:0;border-bottom:1px solid var(--border);padding:0 16px;margin-top:14px;">
+              <div style="padding:10px 14px;font-size:12px;color:var(--fg-subtle);">Notes</div>
+              <div style="padding:10px 14px;font-size:12px;color:var(--fg-subtle);">Transcript</div>
+              <div style="padding:10px 14px;font-size:12px;color:var(--brand);font-weight:600;border-bottom:2px solid var(--brand);">Insights</div>
+            </div>
+            <!-- Content body -->
+            <div style="padding:16px;">
+              <!-- Summary block -->
+              <div style="background:var(--bg-subtle);border-radius:8px;padding:14px;margin-bottom:16px;">
+                <div style="font-size:12px;font-weight:700;color:var(--fg);margin-bottom:6px;">Summary</div>
+                <div style="font-size:11px;color:var(--fg-muted);line-height:1.6;margin-bottom:10px;">Team reviewed Q2 pipeline targets and agreed to prioritize enterprise accounts. Marketing will shift budget toward demo-driven campaigns.</div>
+                <div style="font-size:11px;color:var(--fg-subtle);"><strong style="color:var(--fg-muted);">Participants:</strong> Sarah Chen, Marcus Webb, Priya Patel, Tom Reeves</div>
+              </div>
+              <!-- Action items -->
+              <div style="font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--fg-subtle);margin-bottom:10px;">Action Items</div>
+              <div style="display:flex;flex-direction:column;gap:10px;padding-bottom:20px;">
+                <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--fg);">
+                  <div style="width:14px;height:14px;border-radius:3px;border:1.5px solid var(--border);flex-shrink:0;"></div>
+                  Share revised pipeline targets
+                  <span style="margin-left:auto;font-size:10px;font-weight:600;padding:2px 8px;border-radius:100px;background:#fef2f2;color:#dc2626;">High</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--fg);">
+                  <div style="width:14px;height:14px;border-radius:3px;border:1.5px solid var(--border);flex-shrink:0;"></div>
+                  Draft demo campaign brief
+                  <span style="margin-left:auto;font-size:10px;font-weight:600;padding:2px 8px;border-radius:100px;background:#fffbeb;color:#d97706;">Med</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--fg);">
+                  <div style="width:14px;height:14px;border-radius:3px;border:1.5px solid var(--border);flex-shrink:0;"></div>
+                  Confirm V2 staging access
+                  <span style="margin-left:auto;font-size:10px;font-weight:600;padding:2px 8px;border-radius:100px;background:#f0fdf4;color:#16a34a;">Done</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- SOC 2 trust badge -->
+    <div class="fade-up" style="margin-top:56px;display:flex;align-items:center;gap:10px;color:var(--fg-subtle);font-size:13px;">
+      <svg viewBox="0 0 24 24" fill="#16a34a" width="18" height="18" xmlns="http://www.w3.org/2000/svg"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+      SOC 2 Certified — encrypted in transit and at rest
+    </div>
+  </div>
+</section>
+<section class="section" id="solutions">
+  <div class="container">
+    <div class="section-head fade-up">
+      <span class="eyebrow eyebrow-brand">Built for Your Role</span>
+      <h2>Meeting intelligence for every seat <span>at the table.</span></h2>
+    </div>
+    <div class="roles-grid fade-up">
+      <div class="role-card">
+        <span class="material-symbols-outlined">rocket_launch</span>
+        <h3>Founders & CEOs</h3>
+        <p>Your company runs on decisions made in rooms you can't always be in. Workplace AI captures the conversations that drive your business — board meetings, investor calls, team syncs — and turns them into structured knowledge you can act on, not notes you'll never reread.</p>
+      </div>
+      <div class="role-card">
+        <span class="material-symbols-outlined">trending_up</span>
+        <h3>Sales Teams</h3>
+        <p>Your best reps aren't just better talkers — they ask better questions and follow up faster. Workplace AI captures every prospect conversation and surfaces the patterns, commitments, and objections that separate closed deals from ghosted threads.</p>
+      </div>
+      <div class="role-card">
+        <span class="material-symbols-outlined">psychology</span>
+        <h3>Coaches & Consultants</h3>
+        <p>Your value is in the conversation, not the paperwork after it. Workplace AI captures client sessions and delivers structured insights — so you spend your time coaching, not reconstructing what was said.</p>
+      </div>
+      <div class="role-card">
+        <span class="material-symbols-outlined">groups</span>
+        <h3>Operations & HR</h3>
+        <p>Every all-hands, every interview, every process review — captured and structured. Stop relying on someone's memory. Build an institutional knowledge base that scales with your team.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr style="border:none;border-top:1px solid var(--border);">
+
+<!-- ═══════════════════════════════════════════ TRUST LOGOS (infinite ticker) -->
+<section class="trust-bar">
+  <div class="trust-track">
+    <img src="Workplace AI_files/vFcRQ8qKSxD7QsPw6PnYD635U.png" alt="Client">
+    <img src="Workplace AI_files/PU2dlifAkrSAGSSVD8sukJdRJYE.webp" alt="Client">
+    <img src="Workplace AI_files/H939iJdVU8dZBCHZcOMv1JulGz4.webp" alt="Client">
+    <img src="Workplace AI_files/mizobrmMHSGbEsJvrpXjer9XM.webp" alt="Client">
+    <img src="Workplace AI_files/BBcY3axNHRW48I4mOHckIrKPU.webp" alt="Client">
+    <img src="Workplace AI_files/clS9OCGFV3ohmBjJurwgw8JtuJ4.webp" alt="Client">
+    <img src="Workplace AI_files/FAJR9X9bEPjgJssGQDBkjpXWGM.webp" alt="Client">
+    <img src="Workplace AI_files/MbizcPDRwLwOzsQnIrdWYrHRs.webp" alt="Client">
+    <img src="Workplace AI_files/A9jZQIDb7uvc7EvaCsS3MT0cF0A.webp" alt="Client">
+    <img src="Workplace AI_files/gYilpfInlXZLPYgLLJx7tLpWnA.webp" alt="Client">
+    <img src="Workplace AI_files/xQAknZvttJMavNu9YniE3vzrsGE.png" alt="Client">
+    <img src="Workplace AI_files/vFcRQ8qKSxD7QsPw6PnYD635U.png" alt="Client" aria-hidden="true">
+    <img src="Workplace AI_files/PU2dlifAkrSAGSSVD8sukJdRJYE.webp" alt="Client" aria-hidden="true">
+    <img src="Workplace AI_files/H939iJdVU8dZBCHZcOMv1JulGz4.webp" alt="Client" aria-hidden="true">
+    <img src="Workplace AI_files/mizobrmMHSGbEsJvrpXjer9XM.webp" alt="Client" aria-hidden="true">
+    <img src="Workplace AI_files/BBcY3axNHRW48I4mOHckIrKPU.webp" alt="Client" aria-hidden="true">
+    <img src="Workplace AI_files/clS9OCGFV3ohmBjJurwgw8JtuJ4.webp" alt="Client" aria-hidden="true">
+    <img src="Workplace AI_files/FAJR9X9bEPjgJssGQDBkjpXWGM.webp" alt="Client" aria-hidden="true">
+    <img src="Workplace AI_files/MbizcPDRwLwOzsQnIrdWYrHRs.webp" alt="Client" aria-hidden="true">
+    <img src="Workplace AI_files/A9jZQIDb7uvc7EvaCsS3MT0cF0A.webp" alt="Client" aria-hidden="true">
+    <img src="Workplace AI_files/gYilpfInlXZLPYgLLJx7tLpWnA.webp" alt="Client" aria-hidden="true">
+    <img src="Workplace AI_files/xQAknZvttJMavNu9YniE3vzrsGE.png" alt="Client" aria-hidden="true">
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ TESTIMONIALS (left-aligned head) -->
+<section class="section test-section" id="testimonials">
+  <div class="container">
+    <div class="section-head fade-up">
+      <span class="eyebrow eyebrow-brand">What Teams Are Saying</span>
+      <h2>Real results from <span>real teams.</span></h2>
+    </div>
+    <div class="test-grid fade-up">
+      <div class="test-card">
+        <div class="test-stars">★★★★★</div>
+        <blockquote>"Workplace AI has been incredibly helpful in reviewing recordings to ensure we don't miss any important details. Soar lets us automate parts of our workflow, significantly improving our team's overall efficiency."</blockquote>
+        <div class="test-author">
+          <div class="test-avatar">JA</div>
+          <div>
+            <div class="test-name">Jan Abigail Asignar</div>
+            <div class="test-role">Senior Recruiter, CoDev</div>
+          </div>
+        </div>
+      </div>
+      <div class="test-card">
+        <div class="test-stars">★★★★★</div>
+        <blockquote>"Workplace AI has been a game-changer and provides insightful analysis for every interview, which has been instrumental in ensuring we present top-quality candidates to our clients."</blockquote>
+        <div class="test-author">
+          <div class="test-avatar">JN</div>
+          <div>
+            <div class="test-name">Julie Noren M.</div>
+            <div class="test-role">Placement Supervisor, CoDev</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ FINAL CTA (centered) -->
+<section class="section cta-final" id="book-demo">
+  <div class="container fade-up">
+    <h2>Your meetings already have the answers.<br><span>Start capturing them.</span></h2>
+    <p>See how Workplace AI turns your team's conversations into structured knowledge, tracked execution, and measurable performance.</p>
+    <div class="cta-buttons">
+      <a href="#book-demo" class="btn-primary" style="font-size:16px;padding:14px 32px;">Book a Demo</a>
+      <a href="https://app.workplace-ai.com/Join?ReturnUrl=%2F" class="btn-ghost" target="_blank" rel="noopener">Start Today →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="Workplace AI_files/JWmZL2ePmAxEEB4sHm72PhAW5M8.webp" alt="Workplace AI">
+        <p>Turn your company's conversations into performance.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#features">Features</a>
+        <a href="#solutions">Solutions</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="https://app.workplace-ai.com/Auth/Login" target="_blank" rel="noopener">Login</a>
+        <a href="https://try.soar.com/privacy/" target="_blank" rel="noopener">Privacy</a>
+        <a href="https://try.soar.com/terms/" target="_blank" rel="noopener">Terms</a>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      &copy; 2026 Workplace AI. All rights reserved. Powered by <a href="https://try.soar.com/" target="_blank" rel="noopener">Soar AI Studio</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
