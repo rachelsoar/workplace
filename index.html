@@ -175,63 +175,6 @@
       box-shadow: 0 20px 60px rgba(1,8,27,0.08), 0 0 0 1px rgba(1,8,27,0.03);
       font-family: 'Outfit', sans-serif;
     }
-    .ui-titlebar {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 14px 20px; border-bottom: 1px solid var(--border);
-      background: var(--bg-subtle);
-    }
-    .ui-titlebar-left { display: flex; align-items: center; gap: 8px; }
-    .ui-dot { width: 8px; height: 8px; border-radius: 50%; }
-    .ui-titlebar h4 { font-size: 14px; font-weight: 700; letter-spacing: -0.01em; margin-left: 4px; }
-    .ui-titlebar-date { font-size: 12px; color: var(--fg-subtle); }
-    .ui-tabs {
-      display: flex; gap: 0; border-bottom: 1px solid var(--border);
-    }
-    .ui-tab {
-      padding: 10px 20px; font-size: 13px; font-weight: 500; color: var(--fg-subtle);
-      border-bottom: 2px solid transparent; transition: all 0.15s;
-    }
-    .ui-tab.active { color: var(--brand); border-bottom-color: var(--brand); font-weight: 600; }
-    .ui-body { padding: 20px; }
-    .ui-section-label {
-      font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--fg-subtle); margin-bottom: 10px;
-    }
-    .ui-summary {
-      font-size: 13px; color: var(--fg-muted); line-height: 1.6; font-weight: 300;
-      margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--border);
-    }
-    .ui-action {
-      display: flex; align-items: flex-start; gap: 8px;
-      padding: 6px 0; font-size: 13px; color: var(--fg); font-weight: 400;
-    }
-    .ui-checkbox {
-      width: 16px; height: 16px; border-radius: 4px;
-      border: 1.5px solid var(--border); flex-shrink: 0; margin-top: 1px;
-      background: var(--bg);
-    }
-    .ui-action .tag {
-      font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 100px;
-      margin-left: auto; flex-shrink: 0;
-    }
-    .tag-high { background: #fef2f2; color: #dc2626; }
-    .tag-med { background: #fffbeb; color: #d97706; }
-    .tag-low { background: #f0fdf4; color: #16a34a; }
-    .ui-stats {
-      display: flex; gap: 0; margin-top: 16px; padding-top: 16px;
-      border-top: 1px solid var(--border);
-    }
-    .ui-stat {
-      flex: 1; text-align: center;
-      padding: 8px 0;
-    }
-    .ui-stat:first-child { border-right: 1px solid var(--border); }
-    .ui-stat-val {
-      font-family: 'Urbanist', sans-serif; font-size: 22px; font-weight: 800;
-      color: var(--fg); letter-spacing: -0.02em;
-    }
-    .ui-stat-label { font-size: 12px; color: var(--fg-subtle); margin-top: 2px; }
-
     /* ── Role Cards (left-aligned head) ── */
     .roles-grid {
       display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
@@ -273,6 +216,50 @@
     }
     .test-name { font-family: 'Urbanist', sans-serif; font-weight: 700; font-size: 14px; }
     .test-role { font-size: 13px; color: var(--fg-subtle); }
+
+    /* ── Pricing ── */
+    .pricing-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    }
+    .pricing-card {
+      padding: 36px 32px; border-radius: var(--r-xl);
+      border: 1px solid var(--border); background: var(--bg);
+      display: flex; flex-direction: column;
+    }
+    .pricing-card.featured {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 1px var(--brand), 0 8px 30px rgba(129,0,255,0.08);
+    }
+    .pricing-card h3 { font-size: 22px; font-weight: 800; margin-bottom: 4px; letter-spacing: -0.01em; }
+    .pricing-card .pricing-sub { font-size: 14px; color: var(--fg-muted); font-weight: 300; margin-bottom: 24px; }
+    .pricing-price {
+      font-family: 'Urbanist', sans-serif; font-weight: 800;
+      color: var(--brand); letter-spacing: -0.03em; margin-bottom: 4px;
+    }
+    .pricing-price .amount { font-size: clamp(40px, 5vw, 52px); }
+    .pricing-price .period { font-size: 15px; font-weight: 400; color: var(--fg-muted); }
+    .pricing-divider { height: 1px; background: var(--border); margin: 24px 0; }
+    .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+    .pricing-features li {
+      font-size: 14px; color: var(--fg-muted); font-weight: 400; line-height: 1.5;
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .pricing-features li::before {
+      content: '✓'; color: var(--brand); font-weight: 700; flex-shrink: 0; margin-top: 1px;
+    }
+    .pricing-cta { margin-top: 32px; text-align: center; }
+    .pricing-cta a {
+      display: inline-block; width: 100%; padding: 14px 24px;
+      border-radius: var(--r-pill); font-family: 'Urbanist', sans-serif;
+      font-size: 15px; font-weight: 600; text-align: center;
+      transition: all 0.15s;
+    }
+    .pricing-cta .btn-outline {
+      border: 1.5px solid var(--border); color: var(--brand); background: transparent;
+    }
+    .pricing-cta .btn-outline:hover {
+      border-color: var(--brand); background: var(--brand-tint);
+    }
 
     /* ── V2 Banner (promo-style) ── */
     .v2-banner {
@@ -356,6 +343,7 @@
       .hero h1 { font-size: 38px; }
       .hero-ctas { flex-direction: column; align-items: center; }
       .roles-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
       .test-grid { grid-template-columns: 1fr; }
       .footer-inner { flex-direction: column; gap: 32px; }
     }
@@ -370,12 +358,12 @@
   </a>
   <ul class="nav-links" role="list">
     <li><a href="#features">Features</a></li>
-    <li><a href="#solutions">Solutions</a></li>
+    <li><a href="#pricing">Pricing</a></li>
     <li><a href="#testimonials">Testimonials</a></li>
   </ul>
   <div class="nav-right">
     <a class="nav-signin" href="https://app.workplace-ai.com/Auth/Login" target="_blank" rel="noopener">Login</a>
-    <a class="btn-primary" href="#book-demo">Book a Demo</a>
+    <a class="btn-primary" href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1srJaaEnCBLnf1I8a55TR4nUOTYkLiYJeP98-6chdH1h6W2st48xKy-R0HLTYYnMRy80Cmdmb1" target="_blank" rel="noopener">Book a Demo</a>
   </div>
 </nav>
 
@@ -386,7 +374,7 @@
     <h1 class="fade-up">Turn your company's conversations<br><span>into performance.</span></h1>
     <p class="fade-up">Every meeting captured, structured, and turned into action — automatically.</p>
     <div class="hero-ctas fade-up">
-      <a class="btn-primary" href="#book-demo" style="font-size:16px;padding:14px 32px;">Book a Demo</a>
+      <a class="btn-primary" href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1srJaaEnCBLnf1I8a55TR4nUOTYkLiYJeP98-6chdH1h6W2st48xKy-R0HLTYYnMRy80Cmdmb1" target="_blank" rel="noopener" style="font-size:16px;padding:14px 32px;">Book a Demo</a>
       <a class="btn-ghost" href="#features">See how it works →</a>
     </div>
   </div>
@@ -566,6 +554,79 @@
   </div>
 </section>
 
+<!-- ═══════════════════════════════════════════ PRICING -->
+<section class="section" id="pricing" style="background:var(--bg-subtle);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="section-head fade-up">
+      <span class="eyebrow eyebrow-brand">Pricing</span>
+      <h2>Simple plans for <span>every team.</span></h2>
+    </div>
+    <div class="pricing-grid fade-up">
+      <!-- Tier 1: AI Notetaker -->
+      <div class="pricing-card">
+        <h3>AI Notetaker</h3>
+        <div class="pricing-sub">Best for small teams</div>
+        <div class="pricing-price">
+          <span class="amount">$19</span>
+          <span class="period">/month</span>
+        </div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li>Searchable Transcript</li>
+          <li>Summary Emails</li>
+          <li>Action Items</li>
+          <li>Sentiment Analysis</li>
+          <li>Professional Communication Metrics</li>
+          <li>Access to Insight Marketplace</li>
+          <li>Call clipping and sharing</li>
+        </ul>
+        <div class="pricing-cta">
+          <a href="https://app.workplace-ai.com/Join?ReturnUrl=%2F" target="_blank" rel="noopener" class="btn-outline">Get Started Now</a>
+        </div>
+      </div>
+      <!-- Tier 2: Performance (featured) -->
+      <div class="pricing-card featured">
+        <h3>Performance</h3>
+        <div class="pricing-sub">AI coaching for every job you perform</div>
+        <div class="pricing-price">
+          <span class="amount">$49</span>
+          <span class="period">/month per user</span>
+        </div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li>AI Notetaker Features +</li>
+          <li>Customizable Meeting Intelligence</li>
+          <li>Unlimited AI Performance coaching and feedback</li>
+          <li>AI Workplace AI Insights Included</li>
+          <li>BANT scores AI Insights included</li>
+        </ul>
+        <div class="pricing-cta">
+          <a href="https://app.workplace-ai.com/Join?ReturnUrl=%2F" target="_blank" rel="noopener" class="btn-primary" style="width:100%;">Get Started Now</a>
+        </div>
+      </div>
+      <!-- Tier 3: Enterprise -->
+      <div class="pricing-card">
+        <h3>Enterprise</h3>
+        <div class="pricing-sub">Best for large teams</div>
+        <div class="pricing-price">
+          <span class="amount">Custom</span>
+        </div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li>Performance Features +</li>
+          <li>Customized AI Insights Modules</li>
+          <li>Multi-language Support</li>
+          <li>Custom Onboarding for Large Teams</li>
+          <li>Custom Integrations (CRM, ERP, etc.)</li>
+        </ul>
+        <div class="pricing-cta">
+          <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1srJaaEnCBLnf1I8a55TR4nUOTYkLiYJeP98-6chdH1h6W2st48xKy-R0HLTYYnMRy80Cmdmb1" target="_blank" rel="noopener" class="btn-outline">Get Started Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <hr style="border:none;border-top:1px solid var(--border);">
 
 <!-- ═══════════════════════════════════════════ TRUST LOGOS (infinite ticker) -->
@@ -636,7 +697,7 @@
     <h2>Your meetings already have the answers.<br><span>Start capturing them.</span></h2>
     <p>See how Workplace AI turns your team's conversations into structured knowledge, tracked execution, and measurable performance.</p>
     <div class="cta-buttons">
-      <a href="#book-demo" class="btn-primary" style="font-size:16px;padding:14px 32px;">Book a Demo</a>
+      <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1srJaaEnCBLnf1I8a55TR4nUOTYkLiYJeP98-6chdH1h6W2st48xKy-R0HLTYYnMRy80Cmdmb1" target="_blank" rel="noopener" class="btn-primary" style="font-size:16px;padding:14px 32px;">Book a Demo</a>
       <a href="https://app.workplace-ai.com/Join?ReturnUrl=%2F" class="btn-ghost" target="_blank" rel="noopener">Start Today →</a>
     </div>
   </div>
@@ -652,7 +713,7 @@
       </div>
       <div class="footer-links">
         <a href="#features">Features</a>
-        <a href="#solutions">Solutions</a>
+        <a href="#pricing">Pricing</a>
         <a href="#testimonials">Testimonials</a>
         <a href="https://app.workplace-ai.com/Auth/Login" target="_blank" rel="noopener">Login</a>
         <a href="https://try.soar.com/privacy/" target="_blank" rel="noopener">Privacy</a>
